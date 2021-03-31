@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.6.6/video-js.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.6.6/video.min.js"></script>
+    <script src="https://player.live-video.net/1.2.0/amazon-ivs-videojs-tech.min.js"></script>
+
+    <link rel="stylesheet" href="./node_modules/videojs-contrib-ads/dist/videojs.ads.css">
+    <script src="./node_modules/videojs-contrib-ads/dist/videojs.ads.js"></script>
+    <script src="example-plugin.js"></script>
+</head>
+
+<body>
+    <div class="video-container">
+        <video id="amazon-ivs-videojs" class="video-js vjs-4-3 vjs-big-play-centered" controls autoplay playsinline></video>
+    </div>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .video-container {
+            width: 640px;
+            height: 480px;
+            margin: 15px;
+        }
+    </style>
+    <script>
+        (function play() {
+            // Get playback URL from Amazon IVS API
+            var PLAYBACK_URL = 'video.mp4';
+
+            // Register Amazon IVS as playback technology for Video.js
+            registerIVSTech(videojs);
+
+            // Initialize player
+            var player = videojs('amazon-ivs-videojs', {
+               techOrder: ["AmazonIVS"]
+            });
+
+            player.exampleAds({option: true});
+            player.src(PLAYBACK_URL);
+        })();
+    </script>
+</body>
+</html>
